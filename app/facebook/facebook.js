@@ -38,7 +38,16 @@ var app = angular.module('ngSocial',['ngRoute','ngFacebook'])
    }());
 })
 
-.controller('FacebookCtrl',['$scope',function($scope){
+.controller('FacebookCtrl',['$scope','$facebook',function($scope,$facebook){
 	
 	$scope.isUserLoggedIn = false;
+	$scope.login = function(){
+		$facebook.login().then(function(){
+			refresh();
+		});
+	};
+	
+	function refresh(){
+	
+	}
 }]);

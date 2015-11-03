@@ -2,7 +2,7 @@
 	<div class="col-md-4">
 		<div ng-if="isUserLoggedIn == false">
 			<h3 ng-if="isUserLoggedIn == false">Please Login</h3>
-			<button type="button" class="btn btn-default">Login</button>
+			<button type="button" class="btn btn-default" ng-click="login">Login</button>
 		 </div>
 		 <div ng-if="isUserLoggedIn == true">
 			<h3 ng-if="isUserLoggedIn == false">Welcom : {{userName}}</h3>
