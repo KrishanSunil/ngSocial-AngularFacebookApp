@@ -32,3 +32,14 @@
 	padding-top:20px;
 	padding-left:10px;
 }
+
+.post-content {
+    padding: 20px;
+    overflow: hidden;
+	border-bottom-style: dashed;
+}
+
+.post-content img {
+    margin-right: 15px;
+    float: left;
+}

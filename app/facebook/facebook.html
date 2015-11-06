@@ -2,39 +2,47 @@
 	<div class="col-md-4">
 		<div ng-if="isUserLoggedIn == false">
 			<h3 ng-if="isUserLoggedIn == false">Please Login</h3>
-			<button type="button" class="btn btn-default" ng-click="login">Login</button>
+			<button type="button" class="btn btn-default" ng-click="login()">Login</button>
 		 </div>
 		 <div ng-if="isUserLoggedIn == true">
-			<h3 ng-if="isUserLoggedIn == false">Welcom : {{userName}}</h3>
+			<h3>Welcom : {{userName}}</h3>
 			<img ng-src={{profileImage}}></img>
-			<button type="button" class="btn btn-default">Logout</button>
+			<br><br>
+			<button type="button" class="btn btn-default" ng-click="logout()">Logout</button>
 		 </div>
 		 <br><br>
 		 <div class="well">
 			<h4>User details</h4>
-			<ul>
-				<li>Firstname : Krishan</li>
-				<li>Lastname : Sunil</li>
-				<li>D.O.B : 16/12/1986</li>
-				<li>Locale : enGB</li>
+			<ul ng-show="isUserLoggedIn">
+				<li>Firstname : {{userData.first_name}}</li>
+				<li>Lastname : {{userData.last_name}}</li>
+				<li>D.O.B : {{userData.birthday}}</li>
+				<li>Locale : {{userData.locale}}</li>
 			</ul>
 		 </div>
 		 <div class="well">
 			<h4>User permissions</h4>
-			<ul>
-				<li>email : granted</li>
-				<li>profile_info : granted</li>
-			</ul>
+			<div ng-repeat="permission in permissions">
+				<ul ng-show="isUserLoggedIn">
+					<li>{{permission.permission}} : {{permission.status}}</li>
+				</ul>
+			</div>
 		 </div>
 	</div>
-	<div class="col-md-8">
-		<form>
+	<div class="col-md-8" ng-show="isUserLoggedIn">
+		<form ng-submit="publishPost()" name="submitForm">
 			<div class="form-group">
-				<textarea class="form-control custom-control" rows="3" style="resize:none"></textarea>  
+				<textarea class="form-control custom-control" rows="3" style="resize:none" ng-model="messagebody" name="message"></textarea> 
+				 <span ng-show="submitForm.message.$error.required">Please enter something!</span>
 				<br>
 				<button type="submit" class="btn btn-default">Submit</button>
 			</div>
 			
 		</form>
+		<div class="post-content" ng-repeat="post in posts">
+			 <img ng-src={{profileImage}}></img>
+			<h4>{{post.message}}</h4>
+			<h5>{{post.created_time}}</h5>
+		</div>
 	</div>
 </div>
